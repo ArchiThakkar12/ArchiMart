@@ -48,7 +48,6 @@ public class CustomerAPI {
         customerService.updateShippingAddress(customerEmailId, address);
         String modificationSuccessMsg = environment.getProperty("CustomerAPI.UPDATE_ADDRESS_SUCCESS");
         return new ResponseEntity<>(modificationSuccessMsg, HttpStatus.OK);
-
     }
 
     @DeleteMapping(value = "/customer/{customerEmailId:.+}")

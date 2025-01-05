@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository(value = "customerRepository")
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     List<Customer> findByPhoneNumber(String phoneNumber);

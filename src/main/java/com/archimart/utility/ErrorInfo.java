@@ -1,7 +1,5 @@
 package com.archimart.utility;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
 
 

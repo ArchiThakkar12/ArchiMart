@@ -4,6 +4,7 @@ import com.archimart.exception.ArchiMartException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestClientException;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
+@PropertySource(value = {"messages.properties"})
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 
@@ -53,7 +55,7 @@ public class ExceptionControllerAdvice {
     }
 
     @ExceptionHandler(ArchiMartException.class)
-    public ResponseEntity<ErrorInfo> ekartExceptionHandler(ArchiMartException exception) {
+    public ResponseEntity<ErrorInfo> archiMartExceptionHandler(ArchiMartException exception) {
         ErrorInfo error = new ErrorInfo();
         error.setErrorMessage(environment.getProperty(exception.getMessage()));
         error.setTimestamp(LocalDateTime.now());
