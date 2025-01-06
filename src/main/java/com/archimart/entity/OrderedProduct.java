@@ -1,13 +1,14 @@
 package com.archimart.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 
 @Entity
-@Table(name="EK_ORDERED_PRODUCT")
+@Table(name="ORDERED_PRODUCT")
 public class OrderedProduct {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer orderedProductId;
 	private Integer productId;
 	private Integer quantity;
