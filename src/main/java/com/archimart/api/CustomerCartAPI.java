@@ -5,12 +5,12 @@ import com.archimart.dto.CustomerCartDTO;
 import com.archimart.dto.ProductDTO;
 import com.archimart.exception.ArchiMartException;
 import com.archimart.service.CustomerCartService;
+import com.archimart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Set;
 
@@ -23,10 +23,10 @@ public class CustomerCartAPI {
     private CustomerCartService customerCartService;
 
     @Autowired
-    private Environment environment;
+    private ProductService productService;
 
     @Autowired
-    private RestTemplate template;
+    private Environment environment;
 
 
     @PostMapping(value = "/products")
@@ -45,13 +45,11 @@ public class CustomerCartAPI {
 
         Set<CartProductDTO> cartProductDTOs = customerCartService.getProductsFromCart(customerEmailId);
         for (CartProductDTO cartProductDTO : cartProductDTOs) {
-            ProductDTO productDTO = template.getForEntity("http://localhost:8080/product-api/product/" + cartProductDTO.getProduct().getProductId(),
-                    ProductDTO.class).getBody();
-
+            ProductDTO productDTO = productService.getProductById(cartProductDTO.getProduct().getProductId());
             cartProductDTO.setProduct(productDTO);
         }
-        return new ResponseEntity<>(cartProductDTOs, HttpStatus.OK);
 
+        return new ResponseEntity<>(cartProductDTOs, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/customer/{customerEmailId}/product/{productId}")
