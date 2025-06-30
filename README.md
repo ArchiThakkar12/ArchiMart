@@ -55,7 +55,7 @@
 
 ```bash
 # Clone the project
-git clone https://github.com/your-username/archimart.git
+git clone [https://github.com/your-username/archimart.git](https://github.com/ArchiThakkar12/ArchiMart.git)
 cd archimart
 
 # Open the project in your preferred IDE (IntelliJ, Eclipse)
